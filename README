@@ -1,0 +1,3 @@
+Arduino library to control a uArm.
+
+Copied from Scott Gray's version, which was copied from UFactory's currently defunct version. Check www.ufactory.cc for updates.
