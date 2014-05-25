@@ -1,14 +1,14 @@
 /******************************************************************************
-* File Name          : UF_uArm.h
-* Author             : Evan
-* Updated            : Scott Gray
-* Version            : V0.0.3 SG Version (BETA)
-* Created Date       : 2 MAY, 2014
-* Modified Date      : 22 MAY, 2014
-* Description        :
-* License            :
-* Copyright(C) 2014 UFactory Team. All right reserved.
-*******************************************************************************/
+ * File Name          : UF_uArm.h
+ * Author             : Evan
+ * Updated            : Scott Gray, b3sigma
+ * Version            : V0.0.3 SG Version (BETA)
+ * Created Date       : 2 MAY, 2014
+ * Modified Date      : 22 MAY, 2014
+ * Description        :
+ * License            :
+ * Copyright(C) 2014 UFactory Team. All right reserved.
+ *******************************************************************************/
 
 #include <Arduino.h>
 #include <Servo.h>
@@ -54,54 +54,59 @@
 #define LIMIT_SW                2     // Limit Switch
 #define PUMP_EN                 6     //
 #define VALVE_EN                5     //
-#define SERVO_HAND              9     //
-#define SERVO_HAND_ROT          10    //
-#define SERVO_ROT               11    //
-#define SERVO_R                 12    //
-#define SERVO_L                 13    //
+#define SERVO_HAND              8     // Switched from the default 9
+#define SERVO_HAND_ROT          9     // ditto
+#define SERVO_ROT               10    // ditto
+#define SERVO_R                 11    // ditto
+#define SERVO_L                 12    // ditto
+#define LED                     13    // All so we can get an LED
 
-class UF_uArm
-{
+// Whether to do beeps for notificatinos or use LED flashes
+//#define BUZZ_NOTIFICATION
+
+class UF_uArm {
 public:
-	UF_uArm();
-	void init();    // initialize the uArm position
-    void calibration();  //
-    int readAngle(char _servoNum);
-	void setPosition(double _stretch, double _height, int _armRot, int _handRot);    //
-	void gripperCatch();    //
-	void gripperRelease();  //
-	void gripperDetach();   //
-    void gripperDirectDetach(); //
-    void pumpOn();          // pump enable
-    void pumpOff();         // pump disnable
-    void valveOn();         // valve enable, decompression
-    void valveOff();        // valve disnable
-    void detachServo(char _servoNum);
-	void sendData(byte _dataAdd, int _dataIn); //
+  UF_uArm();
+  void init(); // initialize the uArm position
+  void calibration(); //
+  int readAngle(char _servoNum);
+  void setPosition(double _stretch, double _height, int _armRot, int _handRot); //
+  void gripperCatch(); //
+  void gripperRelease(); //
+  void gripperDetach(); //
+  void gripperDirectDetach(); //
+  void pumpOn(); // pump enable
+  void pumpOff(); // pump disnable
+  void valveOn(); // valve enable, decompression
+  void valveOff(); // valve disnable
+  void detachServo(char _servoNum);
+  void sendData(byte _dataAdd, int _dataIn); //
+
+  void notify(unsigned long _durationMs);
 
 private:
-	/*******************  Servo offset  *******************/
-	char offsetL;
-	char offsetR;
-	char offsetSet;        //SG-> Added to know if offset is set
-	/*****************  Define variables  *****************/
-	int heightLst;
-	int height;
-	int stretch;
-	int rotation;
-	int handRot;
-    int minAngle_L;
-    int minAngle_R;
-    boolean adjustFlag;
-	boolean resetflag;
-    unsigned long delay_loop;
-    unsigned long lstTime;  //limit: 50days
-	/***************  Create servo objects  ***************/
-	Servo servoR;
-	Servo servoL;
-	Servo servoRot;
-	Servo servoHand;
-	Servo servoHandRot;
+  /*******************  Servo offset  *******************/
+  char offsetL;
+  char offsetR;
+  char offsetSet; //SG-> Added to know if offset is set
+  /*****************  Define variables  *****************/
+  int heightLst;
+  int height;
+  int stretch;
+  int rotation;
+  int handRot;
+  int minAngle_L;
+  int minAngle_R;
+  boolean adjustFlag;
+  boolean resetflag;
+  unsigned long delay_loop;
+  unsigned long lstTime; //limit: 50days
+  /***************  Create servo objects  ***************/
+  Servo servoR;
+  Servo servoL;
+  Servo servoRot;
+  Servo servoHand;
+  Servo servoHandRot;
 };
 
 #endif
